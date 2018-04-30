@@ -1,27 +1,22 @@
 'use strict';
 
-var gulp        = require('gulp'),
-    gutil       = require('gulp-util'),
-    // jshint      = require('gulp-jshint'),
-    // concat      = require('gulp-concat'),
-    // uglify      = require('gulp-uglifyjs'),
-    // sass        = require('gulp-sass'),
-    // sourcemaps  = require('gulp-sourcemaps'),
-    // sassGlob    = require('gulp-sass-glob'),
-    livereload  = require('gulp-livereload'),
-    // imagemin    = require('gulp-imagemin'),
+const gulp      = require('gulp'),
     browserSync = require('browser-sync'),
-    reload      = browserSync.reload,
     harp        = require('harp'),
-    http        = require('http'),
     net         = require('net');
 
 const webDirectory = __dirname + '/../';
 
+/**
+ * 
+ * 
+ * @param {number} port 
+ * @param {callback} fn 
+ */
 let isPortTaken = function(port, fn) {
   let tester = net.createServer()
   .once('error', function (err) {
-    if (err.code != 'EADDRINUSE') {
+    if (err.code !== 'EADDRINUSE') {
       return fn(true);
     }
     fn(true);
@@ -30,9 +25,9 @@ let isPortTaken = function(port, fn) {
     tester.once('close', function() { 
       fn(false)
     })
-    .close()
+    .close();
   })
-  .listen(port)
+  .listen(port);
 };
 
 let checkPort = function (callback) {
@@ -47,16 +42,30 @@ let checkPort = function (callback) {
       return callback(portNumber);
     }
   });
-}
+};
 
+/**
+ * Generates a random int between two given values
+ * 
+ * @param {number} min 
+ * @param {number} max 
+ * @returns random int between min and max
+ */
 function randomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
-}
+};
 
+/**
+ * Sets up Browsersync server to proxy
+ * actual server endpoint
+ * 
+ * @param {number} availablePort 
+ */
 let setupBrowserSync = function (availablePort) {
-  browserSync({
-    proxy: "localhost:" + availablePort,
+  browserSync.init(null, {
+    proxy: "roughwood.test",
     port: availablePort + 2,
+    files: ['html/js/', 'html/css/', 'public/img', 'craft/templates/**/*.*'],
     open: false,
     /* Hide the notification. It gets annoying */
     notify: {
@@ -70,24 +79,13 @@ let setupBrowserSync = function (availablePort) {
     let message = err ? err : 'Successful Start';
     console.log(message);
   });
-}
+};
 
-let monitorChanges = function () {
-  /**
-   * Watch for scss changes, tell BrowserSync to refresh main.css
-   */
-  gulp.watch(["public/stylesheets/**.css"], function () {
-    reload("screen.css", {stream: true});
-  });
-
-  /**
-   * Watch for all other changes, reload the whole page
-   */
-  gulp.watch(["*.html", "**/*.ejs", "*.jade", "*.js", "*.json", "*.md"], function () {
-    reload();
-  });
-}
-
+/**
+ * Starts up Browser sync server
+ * 
+ * @param {number} checkPort 
+ */
 let runServer = function (checkPort) {
   let availablePort = checkPort;
   let harpOptions = {
@@ -96,12 +94,15 @@ let runServer = function (checkPort) {
 
   harp.server(webDirectory, harpOptions , function () {
     setupBrowserSync(availablePort);
-    monitorChanges();
-  })
-}
+  });
+};
+/**
+ * Entry point to starting server
+ * 
+ */
 
-let init = function () {
+gulp.task('init', () => {
   checkPort(runServer);
-}
+});
 
-module.exports = init;
+module.exports = Object.keys(gulp.tasks);

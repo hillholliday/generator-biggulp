@@ -8,7 +8,7 @@
     "url": "git+https://github.com/hillholliday/gulp-plate.git"
   },
   "engines": {
-    "node": ">=4.8.0 <4.8.3"
+    "node": ">=6.0"
   },
   "keywords": [
     "Gulp",
@@ -21,23 +21,35 @@
   },
   "homepage": "https://github.com/hillholliday/gulp-plate#readme",
   "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "browserify": "^15.2.0",
+    "babelify": "^8.0.0",
     "browser-sync": "^2.18.7",
     "coffeelint": "^1.15.7",
     "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^5.0.0",
+    "gulp-babel": "^7.0.1",
+    "gulp-cached": "^1.1.1",
+    "gulp-changed": "^3.2.0",
     "gulp-concat": "^2.6.0",
-    "gulp-harp": "0.0.4",
-    "gulp-imagemin": "^3.0.3",
+    "gulp-cssmin": "^0.1.7",
+    "gulp-image": "^4.2.0",
+    "gulp-image-resize": "^0.13.0",
     "gulp-jshint": "^2.0.1",
-    "gulp-livereload": "^3.8.1",
+    "gulp-modernizr": "^1.0.0-alpha",
+    "gulp-rename": "^1.2.2",
     "gulp-sass": "^2.3.2",
     "gulp-sass-glob": "^1.0.6",
     "gulp-sourcemaps": "^1.6.0",
-    "gulp-uglifyjs": "^0.6.2",
+    "gulp-uglify": "^3.0.0",
     "gulp-util": "^3.0.7",
-    "harp": "^0.20.3",
+    "gulp-watch": "^5.0.0",
+    "harp": "^0.24.1",
     "jshint": "^2.9.3",
     "jshint-stylish": "^2.2.1",
-    "jstransformer-marked": "^1.0.1",
-    "surge": "^0.18.0"
+    "surge": "^0.18.0",
+    "vinyl-buffer": "^1.0.1",
+    "vinyl-source-stream": "^2.0.0"
   }
 }

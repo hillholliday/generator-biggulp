@@ -25,7 +25,7 @@ yo generator-biggulp
 
 ## License
 
-MIT © [Ethan Desilets]()
+MIT © [Hill Holliday]()
 
 
 [npm-image]: https://badge.fury.io/js/generator-biggulp.svg

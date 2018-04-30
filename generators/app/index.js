@@ -12,7 +12,7 @@ module.exports = class extends Generator {
         chalk.green('Hill Holliday\'s\n') +
         chalk.red('Frontend\n') +
         chalk.green('generator!\n') +
-        chalk.cyan('WARNING: USE NODE V4.8.*')
+        chalk.cyan('WARNING: USE NODE V6.x LTS')
       )
     ));
 
